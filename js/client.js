@@ -200,7 +200,7 @@ var btnDynamicSearchCallback = function (t, opts) {
         .then(res => res.json())
         .then(dogs => dogs.map(dog => {
           return {
-            text: `${dog.name}(${dog.id})`, callback: function (t, opts) {
+            text: `${dog.name} (${dog.id})`, callback: function (t, opts) {
               if (t.memberCanWriteToModel('card')) {
                 return t.attach({ url: `https://lucask9.com/#/dog/${dog.id}/view`, name: `${dog.name} (${dog.id})` })
                   .then(function () {
