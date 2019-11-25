@@ -224,7 +224,7 @@ var btnDynamicSearchCallback = function (t, opts) {
       // optional # of ms to debounce search to
       // defaults to 300, override must be larger than 300
       debounce: 300,
-      placeholder: 'Wyszukaj psa po imieniu lub id',
+      placeholder: 'Wyszukaj po imieniu lub id',
       empty: 'Nie znaleziono.',
       searching: 'Wyszukiwanie...'
     }
