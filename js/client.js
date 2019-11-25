@@ -339,7 +339,7 @@ TrelloPowerUp.initialize({
       title: '👉 ' + options.url + ' 👈',
       image: {
         url: DOG_ICON,
-        logo: true // false if you are using a thumbnail of the content
+        logo: options.url.includes('https://lucask9.com/#/dog/') ? true : false // false if you are using a thumbnail of the content
       },
     };
 
