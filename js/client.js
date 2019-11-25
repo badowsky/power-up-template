@@ -334,12 +334,13 @@ TrelloPowerUp.initialize({
     // doesn't warrant pulling it out into a section via the attachment-sections capability
     // for example if you just want to show a preview image and give it a better name
     // then attachment-thumbnail is the best option
+    const isUrlToDog = options.url.includes('https://lucask9.com/#/dog/');
     return {
       url: options.url,
       title: '👉 ' + options.url + ' 👈',
       image: {
-        url: DOG_ICON,
-        logo: options.url.includes('https://lucask9.com/#/dog/') ? true : false // false if you are using a thumbnail of the content
+        url: isUrlToDog ? DOG_ICON : null,
+        logo: false // false if you are using a thumbnail of the content
       },
     };
 
