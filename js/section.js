@@ -12,7 +12,7 @@ t.render(function(){
   t.card('attachments')
   .get('attachments')
   .filter(function(attachment){
-    return attachment.url.indexOf('https://lucask9.com/#/dog/') == 0;
+    return attachment.url.includes('https://lucask9.com/#/dog/');
   })
   .then(function(yellowstoneAttachments){
     var urls = yellowstoneAttachments.map(function(a){ return a.url; });

@@ -299,7 +299,8 @@ TrelloPowerUp.initialize({
 
     // we will just claim urls for Yellowstone
     var claimed = options.entries.filter(function (attachment) {
-      return attachment.url.indexOf('https://lucask9.com/#/dog/') === 0;
+      console.log('Claim sekcji', attachment.url, attachment.url.includes('https://lucask9.com/#/dog/'));
+      return attachment.url.includes('https://lucask9.com/#/dog/');
     });
 
     // you can have more than one attachment section on a card
