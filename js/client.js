@@ -199,35 +199,37 @@ var btnDynamicSearchCallback = function (t, opts) {
       // use options.search which is the search text entered so far
       // return a Promise that resolves to an array of items
       // similar to the items you provided in the client side version above
-      // return window.fetch('https://lucask9.com/api/public/dogs?page=0&size=10&name.contains=' + options.search)
-      //   .then(res => res.json())
-      //   .then(dogs => dogs.map(dog => {
-      //     return {
-      //       text: dog.name + '(' + dog.id + ')', callback: function (t, opts) {
-      //         // In this case we want to attach that park to the card as an attachment
-      //         // but first let's ensure that the user can write on this model
-      //         if (t.memberCanWriteToModel('card')) {
-      //           return t.attach({ url: 'https://lucask9.com/#/dogs/' + dog.id + '/view/general', name: dog.name + '(' + dog.id + ')' })
-      //             .then(function () {
-      //               // once that has completed we should tidy up and close the popup
-      //               return t.closePopup();
-      //             });
-      //         } else {
-      //           console.log("Oh no! You don't have permission to add attachments to this card.")
-      //           return t.closePopup(); // We're just going to close the popup for now.
-      //         };
-      //       }
-      //     };
-      return new Promise(function (resolve) {
-        // you'd probably be making a network request at this point
-        resolve([{
-          text: 'Result 1',
-          callback: function (t, opts) {  }
-        }, {
-          text: 'Result 2',
-          callback: function (t, opts) { }
-        }]);
-      });
+      return window.fetch('https://lucask9.com/api/public/dogs?page=0&size=10&name.contains=' + options.search)
+        .then(res => res.json())
+        .then(dogs => dogs.map(dog => {
+          return {
+            text: dog.name + '(' + dog.id + ')', callback: function (t, opts) {
+              // In this case we want to attach that park to the card as an attachment
+              // but first let's ensure that the user can write on this model
+              if (t.memberCanWriteToModel('card')) {
+                return t.attach({ url: 'https://lucask9.com/#/dogs/' + dog.id + '/view/general', name: dog.name + '(' + dog.id + ')' })
+                  .then(function () {
+                    // once that has completed we should tidy up and close the popup
+                    return t.closePopup();
+                  });
+              } else {
+                console.log("Oh no! You don't have permission to add attachments to this card.")
+                return t.closePopup(); // We're just going to close the popup for now.
+              };
+            }
+          };
+        }))
+
+      // return new Promise(function (resolve) {
+      //   // you'd probably be making a network request at this point
+      //   resolve([{
+      //     text: 'Result 1',
+      //     callback: function (t, opts) {  }
+      //   }, {
+      //     text: 'Result 2',
+      //     callback: function (t, opts) { }
+      //   }]);
+      // }));
     },
     search: {
       // optional # of ms to debounce search to
