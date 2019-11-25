@@ -196,33 +196,24 @@ var btnDynamicSearchCallback = function (t, opts) {
   return t.popup({
     title: 'Psy',
     items: function (t, options) {
-      // use options.search which is the search text entered so far
-      // return a Promise that resolves to an array of items
-      // similar to the items you provided in the client side version above
       return window.fetch(`https://lucask9.com/api/public/dogs-list?page=0&size=10&sort=name,asc&search=${options.search}`)
         .then(res => res.json())
         .then(dogs => dogs.map(dog => {
           return {
             text: `${dog.name}(${dog.id})`, callback: function (t, opts) {
-              // In this case we want to attach that park to the card as an attachment
-              // but first let's ensure that the user can write on this model
               if (t.memberCanWriteToModel('card')) {
-                return t.attach({ url: `https://lucask9.com/#/dogs/${dog.id}/view/general`, name: `${dog.name}(${dog.id})` })
+                return t.attach({ url: `https://lucask9.com/#/dog/${dog.id}/view`, name: `${dog.name} (${dog.id})` })
                   .then(function () {
-                    // once that has completed we should tidy up and close the popup
                     return t.closePopup();
                   });
               } else {
-                console.log("Oh no! You don't have permission to add attachments to this card.")
-                return t.closePopup(); // We're just going to close the popup for now.
+                return t.closePopup();
               };
             }
           };
         }))
     },
     search: {
-      // optional # of ms to debounce search to
-      // defaults to 300, override must be larger than 300
       debounce: 300,
       placeholder: 'Wyszukaj po imieniu lub id',
       empty: 'Nie znaleziono.',
