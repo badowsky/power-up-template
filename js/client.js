@@ -79,6 +79,7 @@ t.getAll();
 var GLITCH_ICON = './images/glitch.svg';
 var WHITE_ICON = './images/icon-white.svg';
 var GRAY_ICON = './images/icon-gray.svg';
+var DOG_ICON = './images/dog.svg'
 
 var randomBadgeColor = function () {
   return ['green', 'yellow', 'red', 'none'][Math.floor(Math.random() * 4)];
@@ -199,10 +200,15 @@ var btnDynamicSearchCallback = function (t, opts) {
       return window.fetch(`https://lucask9.com/api/public/dogs-list?page=0&size=10&sort=name,asc&search=${options.search}`)
         .then(res => res.json())
         .then(dogs => dogs.map(dog => {
+          const dogNameWithId = `${dog.name} (${dog.id})`;
           return {
-            text: `${dog.name} (${dog.id})`, callback: function (t, opts) {
+            text: dogNameWithId,
+            callback: function (t, opts) {
               if (t.memberCanWriteToModel('card')) {
-                return t.attach({ url: `https://lucask9.com/#/dog/${dog.id}/view`, name: `${dog.name} (${dog.id})` })
+                return t.attach({
+                  url: `https://lucask9.com/#/dog/${dog.id}/view`,
+                  name: dogNameWithId
+                })
                   .then(function () {
                     return t.closePopup();
                   });
@@ -332,7 +338,7 @@ TrelloPowerUp.initialize({
       url: options.url,
       title: '👉 ' + options.url + ' 👈',
       image: {
-        url: GLITCH_ICON,
+        url: DOG_ICON,
         logo: true // false if you are using a thumbnail of the content
       },
     };
@@ -362,7 +368,7 @@ TrelloPowerUp.initialize({
   },
   'card-buttons': function (t, options) {
     return [{
-      icon: GRAY_ICON,
+      icon: DOG_ICON,
       text: 'Dodaj psa',
       callback: btnDynamicSearchCallback
     }, {
