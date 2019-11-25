@@ -372,7 +372,7 @@ TrelloPowerUp.initialize({
   'card-buttons': function (t, options) {
     return [{
       icon: GRAY_ICON,
-      text: 'Dynamic search',
+      text: 'Dodaj psa',
       callback: btnDynamicSearchCallback
     }, {
       // usually you will provide a callback function to be run on button click
